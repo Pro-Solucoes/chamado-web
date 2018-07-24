@@ -1,0 +1,68 @@
+<div class="col-md-4" style="margin-left: 0%">
+  <!-- Horizontal Form -->
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Novo Ticket</h3>
+    </div>
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()">
+      <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <strong>{{ message.text }}</strong>
+      </div>
+      <div class="box-body">
+        <div [ngClass]="getFromGroupClass(titulo.invalid, titulo.dirty)">
+          <label for="inputTitulo" class="col-sm-2 control-label">Titulo</label>
+          <div class="col-sm-10">
+            <input type="text"
+                   [(ngModel)]="ticket.titulo"
+                   class="form-control"
+                   name="titulo"
+                   id="inputTitulo"
+                   #titulo="ngModel"
+                   placeholder="Titulo"
+                   required>
+            <span class="help-block" *ngIf="titulo.invalid && titulo.dirty">Titulo é Obrigatorio</span>
+          </div>
+        </div>
+
+        <div [ngClass]="getFromGroupClass(prioridade.invalid, prioridade.dirty)">
+          <label for="inputPrioridade" class="col-sm-2 control-label">Prioridade</label>
+          <div class="col-sm-10">
+            <select
+              [(ngModel)]="ticket.prioridade"
+              class="form-control select2"
+              id="inputPrioridade"
+              name="prioridade"
+              #perfil="ngModel"
+              style="width: 100%"
+              required>
+              <option>Alta</option>
+              <option>Normal</option>
+              <option>Baixa</option>
+            </select>
+            <span class="help-block" *ngIf="prioridade.invalid && prioridade.dirty">Prioridade é obrigatorio</span>
+          </div>
+        </div>
+
+        <div class="box-body">
+          <div [ngClass]="getFromGroupClass(descricao.invalid, descricao.dirty)">
+            <label for="inputDescricao" class="col-sm-2 control-label">Descricao</label>
+            <div class="col-sm-10">
+              <textarea
+                     [(ngModel)]="ticket.descricao"
+                     class="form-control"
+                     name="descricao"
+                     id="inputDescricao"
+                     #titulo="ngModel"
+                     placeholder="Descrição"
+                     required>
+              <span class="help-block" *ngIf="descricao.invalid && descricao.dirty">Descrição é Obrigatorio</span>
+            </div>
+          </div>
+      </div>
+
+      <div class="box-footer">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-info pull-right">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
